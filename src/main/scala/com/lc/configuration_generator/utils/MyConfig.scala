@@ -16,14 +16,14 @@ object MyConfig {
   import pureconfig._
   import pureconfig.generic.auto._
 
-//  private val configFactory = ConfigFactory.load()
+  //读取配置文件
+  private val source = ConfigSource.resources("application.conf")
 
-  private val source: ConfigObjectSource = ConfigSource.resources("application.conf")
-
-
+  //封装成Config对象，有异常抛出
   def getConfig = {
     source.loadOrThrow[Config]
   }
+
 
   case class Config(
                      mysqlSql: String,

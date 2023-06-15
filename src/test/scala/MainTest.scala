@@ -21,7 +21,7 @@ object MainTest {
     WriterHelper
 
 
-/*      if (args.isEmpty || args.length>2) {
+      if (args.isEmpty || args.length>2) {
         logger.debug("获取参数失败，请检查")
       }
       else if(args.length <2 ) {
@@ -36,7 +36,7 @@ object MainTest {
           ReadHelper
           WriterHelper
         }
-      }*/
+      }
 
     //        args(0).toLowerCase() match {
     //          case "mysql_hdfs" => ReadHelper

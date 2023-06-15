@@ -15,15 +15,15 @@ import org.apache.logging.log4j.LogManager
  *
  */
 
-object Main {
+object DataxGenerator {
   def main(args: Array[String]): Unit = {
+
     val logger = LogManager.getLogger(getClass)
 
           if (args.isEmpty || args.length>2) {
             logger.debug("获取参数失败，请检查")
           }
           else if(args.length <2 ) {
-
             if ( "mh".equals(args(0).toLowerCase())){
               ReadHelper
             }
@@ -35,5 +35,5 @@ object Main {
               WriterHelper
             }
           }
-  }
+   }
 }

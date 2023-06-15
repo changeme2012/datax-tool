@@ -22,17 +22,13 @@ object ReadHelper {
   //2.查询元数据库
   val tableBeanList = queryDb(config.mysqlSql, classOf[MysqlTableProcess], config.mysqlTableSchema)
 
-  //3.按表名分组封装成map
-  val map = tableBeanList.groupBy(_.tableName).mapValues {
-    _.map(str => {
-      (str.getColumnName, str.getDataType)
-    })
-  }
+  //3.按表名分组封装成map(表名，list((列名，类型)))
+  val map = tableBeanList.groupBy(_.tableName).mapValues {_.map(str => (str.columnName, str.dataType))}
 
   //   println(map.get("order_detail"))
 
   //4.过滤出指定的表
-  val tableFilter: Map[String, List[(String, String)]] = map.filter(str => config.mysqlTableNameList.contains(str._1))
+  val tableFilter = map.filter(str => config.mysqlTableNameList.contains(str._1))
   //    println(tableFilter)
 
   //处理import-json
@@ -64,11 +60,11 @@ object ReadHelper {
         writerColumnArray.add(newColumnAndType)
       }
     }
-          println(jsonObject)
+
+    println(jsonObject)
 
     val path = s"${config.importPath}\\${config.mysqlTableSchema}.${str._1}.json"
     //      println(path)
-
     //保存到批定目录
     saveFile(path, jsonObject.toString)
   })
