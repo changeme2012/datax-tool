@@ -17,7 +17,7 @@ object MyConfig {
   import pureconfig.generic.auto._
 
   //读取配置文件
-  private val source = ConfigSource.resources("application.conf")
+  private val source = ConfigSource.file("conf/application.conf")
 
   //封装成Config对象，有异常抛出
   def getConfig = {

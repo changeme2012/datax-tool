@@ -3,9 +3,12 @@ import com.alibaba.druid.pool.DruidDataSourceFactory
 import org.apache.commons.dbutils.{BasicRowProcessor, GenerousBeanProcessor, QueryRunner}
 import org.apache.commons.dbutils.handlers.{BeanHandler, BeanListHandler}
 
+import java.io.FileInputStream
+import java.nio.file.Path
 import java.util.Properties
 import javax.sql.DataSource
 import scala.collection.JavaConverters.asScalaBufferConverter
+
 
 /**
  * ClassName:DbHelper
@@ -20,7 +23,10 @@ object DbHelper {
 
   private val properties = new Properties()
 
-  properties.load(DbHelper.getClass.getClassLoader.getResourceAsStream("druid.properties"))
+
+//  properties.load(DbHelper.getClass.getClassLoader.getResourceAsStream("/conf/druid.properties"))
+
+  properties.load(new FileInputStream("conf/druid.properties"))
 
   private val dataSource: DataSource = DruidDataSourceFactory.createDataSource(properties)
 
